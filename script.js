@@ -1,5 +1,5 @@
-var count = 0;
-var minMove = 0;
+var count=0;
+var minMove=0;
 
 class Box {
     constructor(x, y) {
@@ -204,44 +204,46 @@ class Game {
 
         // Render message
         if (status === "won") {
-
-            if (move < 200 && move > 150) {
-                minMove = 150;
-                document.querySelector(".message").textContent = "You win!";
-                count++;
-                alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
-            } else if (move < 150 && move > 130) {
-                minMove = 130;
-                document.querySelector(".message").textContent = "You win!";
-                count++;
-                alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
-            } else if (move < 130 && move > 100) {
-                minMove = 100;
-                document.querySelector(".message").textContent = "You win!";
-                count++;
-                alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
-            } else if (move < 100) {
-                document.querySelector(".message").textContent = "You have mastered the game!";
-            }
-
-            // if(move < minMove){
-            //     // document.querySelector(".message").textContent = "You win!";
-            //     // count++;
-            //     // if(minMove=200) minMove=150;
-            //     // else if(minMove=150) minMove=100;
-            //     // else if(minMove=100) minMove=75;
-            //     // alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
-            // }
-            else {
+            if(minMove!==0 && move>minMove){
+                count=0;
                 document.querySelector(".message").textContent = "You lost! Better luck next time ";
-                count = 0;
                 newButton.textContent = "Play again";
             }
-
+            else{
+                if(move < 250 && move > 150){
+                    minMove=150;
+                    document.querySelector(".message").textContent = "You win!";
+                    count++;
+                    alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
+                }
+                else if(move < 150 && move>130){
+                    minMove=130;
+                    document.querySelector(".message").textContent = "You win!";
+                    count++;
+                    alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
+                }
+                else if(move<130 && move>100){
+                    minMove=100;
+                    document.querySelector(".message").textContent = "You win!";
+                    count++;
+                    alert(`Arrange the boxes in less than ${minMove} moves to win this level`)
+                }
+                else if(move<100){
+                    document.querySelector(".message").textContent = "You have mastered the game!";
+                    alert('You are already at master level. We cannot decide your rank.Thankyou for playing Master!');
+                    newButton.textContent = "Play again";
+                }
+                else{
+                    document.querySelector(".message").textContent = "You lost! Better luck next time ";
+                    count=0;
+                    newButton.textContent = "Play again";
+                }
+            }
             document.querySelector(".level").textContent = `Level: ${count}`;
 
         } else {
-            document.querySelector(".message").textContent = "Arrange Blocks in Ascending Order to Win the Game !!!";
+            if(minMove===0) document.querySelector(".message").textContent = "Arrange Blocks in Ascending Order within 250 moves to win the level !!!";
+           else document.querySelector(".message").textContent = `Arrange Blocks in Ascending Order within ${minMove} moves to win the level !!!`;
         }
     }
 }
