@@ -90,11 +90,11 @@ body {
     }
     .message {
         position: relative;
-        top: 30%;
+        top: 25%;
     }
     .count {
         position: relative;
-        top: 25%;
+        top: 30%;
     }
 }
 
